@@ -1,7 +1,6 @@
 package email;
 
 import java.util.Properties;
-
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -9,11 +8,9 @@ import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Store;
 
-public class CheckingMails {
+public class EmailClass {
 
-   public static void check(String host, String storeType, String user,
-      String password) 
-   {
+   public static void check(String host, String storeType, String user, String password) {
       try {
 
       Properties properties = new Properties();
@@ -55,15 +52,15 @@ public class CheckingMails {
       }
    }
 
-   public static void main(String[] args) {
+    public static void main(String[] args) {
 
-      String host = "pop.gmail.com";// change accordingly
-      String mailStoreType = "pop3";
-      String username = "megabinman123@gmail.com";// change accordingly
-      String password = "***";// change accordingly
+        String host = "pop.gmail.com";
+        String mailStoreType = "pop3";
+        String username = "megabinman123@gmail.com";// megabinman123@gmail.com
+        String password = "cheese123";
 
-      check(host, mailStoreType, username, password);
+        check(host, mailStoreType, username, password);
 
-   }
+    }
 
 }

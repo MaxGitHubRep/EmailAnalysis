@@ -27,14 +27,20 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        type = new javax.swing.ButtonGroup();
         back = new javax.swing.JPanel();
         top = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
         panelDetails = new javax.swing.JPanel();
         enterUsername = new javax.swing.JTextField();
         enterPassword = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        panelsInfo = new javax.swing.JPanel();
+        enterSubmit = new javax.swing.JButton();
+        enterFolder = new javax.swing.JTextField();
+        panelsGraph = new javax.swing.JPanel();
+        panelsSettings = new javax.swing.JPanel();
+        panelTimeFrame = new javax.swing.JPanel();
+        graphTypeMonth = new javax.swing.JRadioButton();
+        graphTypeYear = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Email Analysis");
@@ -76,21 +82,26 @@ public class GUI extends javax.swing.JFrame {
         enterPassword.setToolTipText("Enter password here...");
         enterPassword.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
-        jButton1.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 153, 153));
-        jButton1.setText("Enter");
-        jButton1.setToolTipText("");
+        enterSubmit.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
+        enterSubmit.setForeground(new java.awt.Color(0, 153, 153));
+        enterSubmit.setText("Enter");
+        enterSubmit.setToolTipText("");
+
+        enterFolder.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        enterFolder.setToolTipText("Enter folder name here...");
+        enterFolder.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         javax.swing.GroupLayout panelDetailsLayout = new javax.swing.GroupLayout(panelDetails);
         panelDetails.setLayout(panelDetailsLayout);
         panelDetailsLayout.setHorizontalGroup(
             panelDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDetailsLayout.createSequentialGroup()
+            .addGroup(panelDetailsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
-                    .addComponent(enterUsername, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(enterPassword, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGroup(panelDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(enterSubmit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                    .addComponent(enterUsername)
+                    .addComponent(enterPassword)
+                    .addComponent(enterFolder))
                 .addContainerGap())
         );
         panelDetailsLayout.setVerticalGroup(
@@ -100,22 +111,81 @@ public class GUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(enterPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(enterFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(enterSubmit)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panelsInfo.setBackground(new java.awt.Color(255, 255, 255));
-        panelsInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "General Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 36), new java.awt.Color(0, 153, 153))); // NOI18N
+        panelsGraph.setBackground(new java.awt.Color(255, 255, 255));
+        panelsGraph.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Graph", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 36), new java.awt.Color(0, 153, 153))); // NOI18N
 
-        javax.swing.GroupLayout panelsInfoLayout = new javax.swing.GroupLayout(panelsInfo);
-        panelsInfo.setLayout(panelsInfoLayout);
-        panelsInfoLayout.setHorizontalGroup(
-            panelsInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panelsGraphLayout = new javax.swing.GroupLayout(panelsGraph);
+        panelsGraph.setLayout(panelsGraphLayout);
+        panelsGraphLayout.setHorizontalGroup(
+            panelsGraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        panelsInfoLayout.setVerticalGroup(
-            panelsInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 317, Short.MAX_VALUE)
+        panelsGraphLayout.setVerticalGroup(
+            panelsGraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 535, Short.MAX_VALUE)
+        );
+
+        panelsSettings.setBackground(new java.awt.Color(255, 255, 255));
+        panelsSettings.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Settings", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 36), new java.awt.Color(0, 153, 153))); // NOI18N
+
+        panelTimeFrame.setBackground(new java.awt.Color(255, 255, 255));
+        panelTimeFrame.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Time Frame", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 18), new java.awt.Color(0, 153, 153))); // NOI18N
+
+        type.add(graphTypeMonth);
+        graphTypeMonth.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        graphTypeMonth.setForeground(new java.awt.Color(0, 153, 153));
+        graphTypeMonth.setText("This Month");
+        graphTypeMonth.setIconTextGap(8);
+        graphTypeMonth.setOpaque(false);
+
+        type.add(graphTypeYear);
+        graphTypeYear.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        graphTypeYear.setForeground(new java.awt.Color(0, 153, 153));
+        graphTypeYear.setText("This Year");
+        graphTypeYear.setIconTextGap(8);
+        graphTypeYear.setOpaque(false);
+
+        javax.swing.GroupLayout panelTimeFrameLayout = new javax.swing.GroupLayout(panelTimeFrame);
+        panelTimeFrame.setLayout(panelTimeFrameLayout);
+        panelTimeFrameLayout.setHorizontalGroup(
+            panelTimeFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTimeFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelTimeFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(graphTypeYear, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+                    .addComponent(graphTypeMonth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        panelTimeFrameLayout.setVerticalGroup(
+            panelTimeFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTimeFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(graphTypeMonth)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(graphTypeYear)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout panelsSettingsLayout = new javax.swing.GroupLayout(panelsSettings);
+        panelsSettings.setLayout(panelsSettingsLayout);
+        panelsSettingsLayout.setHorizontalGroup(
+            panelsSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelsSettingsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelTimeFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelsSettingsLayout.setVerticalGroup(
+            panelsSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelsSettingsLayout.createSequentialGroup()
+                .addComponent(panelTimeFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout backLayout = new javax.swing.GroupLayout(back);
@@ -127,17 +197,22 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelDetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelsInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panelsSettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelsGraph, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         backLayout.setVerticalGroup(
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backLayout.createSequentialGroup()
                 .addComponent(top, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelsInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(backLayout.createSequentialGroup()
+                        .addComponent(panelDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panelsSettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panelsGraph, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -192,12 +267,18 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel back;
+    private javax.swing.JTextField enterFolder;
     private javax.swing.JPasswordField enterPassword;
+    private javax.swing.JButton enterSubmit;
     private javax.swing.JTextField enterUsername;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JRadioButton graphTypeMonth;
+    private javax.swing.JRadioButton graphTypeYear;
     private javax.swing.JPanel panelDetails;
-    private javax.swing.JPanel panelsInfo;
+    private javax.swing.JPanel panelTimeFrame;
+    private javax.swing.JPanel panelsGraph;
+    private javax.swing.JPanel panelsSettings;
     private javax.swing.JLabel title;
     private javax.swing.JPanel top;
+    private javax.swing.ButtonGroup type;
     // End of variables declaration//GEN-END:variables
 }
