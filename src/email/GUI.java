@@ -6,13 +6,23 @@
 package email;
 
 import java.awt.Desktop;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.DateFormatSymbols;
 import java.util.Date;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.NoSuchProviderException;
+import javax.swing.ImageIcon;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
@@ -24,6 +34,14 @@ public class GUI extends javax.swing.JFrame {
     
     public void enterEmailData() {
         System.out.println(email.getEmailCount(enterUsername.getText(), passwordToString(enterPassword.getPassword()), enterFolder.getText(), (graphTypeMonth.isSelected() ? getTodaysMonth() : "ALL")));
+        
+        try {
+            createGraph("ALL");
+        } catch (NoSuchProviderException ex) {
+            
+        } catch (Exception ex) {
+            
+        }
     }
     
     public String getTodaysMonth() {
@@ -36,6 +54,26 @@ public class GUI extends javax.swing.JFrame {
             sb.append(c);
         return sb.toString();
         
+    }
+    
+    public void createGraph(String month) throws Exception {
+        
+        final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        
+        for (String monthTemp : new DateFormatSymbols().getMonths()) {
+            if (!monthTemp.equals("")) {
+                dataset.addValue(new Random().nextInt(90)+10, monthTemp.substring(0, 3), monthTemp.substring(0, 3));
+            }
+        }
+        
+        JFreeChart barChart = ChartFactory.createBarChart("Email Rates", "Month", "Email #", dataset, PlotOrientation.VERTICAL, true, true, false);
+
+        File BarChart = new File("BarChart.png"); 
+        ChartUtilities.saveChartAsJPEG(BarChart , barChart , graphHold.getWidth() , graphHold.getHeight());
+        
+        BufferedImage image = barChart.createBufferedImage(graphHold.getWidth(), graphHold.getHeight());
+        
+        graphHold.setIcon(new ImageIcon(image));
     }
     
     public void openURL(String text) throws URISyntaxException, IOException {
@@ -71,7 +109,8 @@ public class GUI extends javax.swing.JFrame {
         panelTimeFrame = new javax.swing.JPanel();
         graphTypeMonth = new javax.swing.JRadioButton();
         graphTypeYear = new javax.swing.JRadioButton();
-        panelsGraph = new javax.swing.JPanel();
+        panelGraph = new javax.swing.JPanel();
+        graphHold = new javax.swing.JLabel();
         panelsSettings = new javax.swing.JPanel();
         about = new javax.swing.JLabel();
 
@@ -199,18 +238,23 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        panelsGraph.setBackground(new java.awt.Color(255, 255, 255));
-        panelsGraph.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Graph", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 36), new java.awt.Color(0, 153, 153))); // NOI18N
+        panelGraph.setBackground(new java.awt.Color(255, 255, 255));
+        panelGraph.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Graph", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 36), new java.awt.Color(0, 153, 153))); // NOI18N
 
-        javax.swing.GroupLayout panelsGraphLayout = new javax.swing.GroupLayout(panelsGraph);
-        panelsGraph.setLayout(panelsGraphLayout);
-        panelsGraphLayout.setHorizontalGroup(
-            panelsGraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 999, Short.MAX_VALUE)
+        javax.swing.GroupLayout panelGraphLayout = new javax.swing.GroupLayout(panelGraph);
+        panelGraph.setLayout(panelGraphLayout);
+        panelGraphLayout.setHorizontalGroup(
+            panelGraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGraphLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(graphHold, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        panelsGraphLayout.setVerticalGroup(
-            panelsGraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 535, Short.MAX_VALUE)
+        panelGraphLayout.setVerticalGroup(
+            panelGraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGraphLayout.createSequentialGroup()
+                .addComponent(graphHold, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         panelsSettings.setBackground(new java.awt.Color(255, 255, 255));
@@ -251,7 +295,7 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(panelDetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelsSettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelsGraph, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelGraph, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         backLayout.setVerticalGroup(
@@ -262,9 +306,9 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backLayout.createSequentialGroup()
                         .addComponent(panelDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                         .addComponent(panelsSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(panelsGraph, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panelGraph, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -332,11 +376,12 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPasswordField enterPassword;
     private javax.swing.JButton enterSubmit;
     private javax.swing.JTextField enterUsername;
+    public javax.swing.JLabel graphHold;
     private javax.swing.JRadioButton graphTypeMonth;
     private javax.swing.JRadioButton graphTypeYear;
     private javax.swing.JPanel panelDetails;
+    public javax.swing.JPanel panelGraph;
     private javax.swing.JPanel panelTimeFrame;
-    private javax.swing.JPanel panelsGraph;
     private javax.swing.JPanel panelsSettings;
     private javax.swing.JLabel title;
     private javax.swing.JPanel top;
