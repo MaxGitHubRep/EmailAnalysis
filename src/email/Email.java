@@ -1,5 +1,6 @@
 package email;
 
+import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Properties;
 import javax.mail.Folder;
@@ -29,13 +30,56 @@ public class Email {
         store = emailSession.getStore("pop3s");
     }
     
+    public int[] getEmailCountPerMonth(String user, String password, String folder) {
+        int[] emailCount = new int[12];
+        
+        try {
+            if (store.isConnected()) {
+                store.close();
+            }
+            store.connect(host, user, password);
+            
+            Folder emailFolder = store.getFolder(folder.toUpperCase());
+            emailFolder.open(Folder.READ_ONLY);
+            Message[] messages = emailFolder.getMessages();
+            
+            int index = 0;
+            
+            for (String monthTemp : new DateFormatSymbols().getMonths()) {
+                int value = 0;
+                if (!monthTemp.equals("")) {
+                    for (int i = 0, n = messages.length; i < n; i++) {
+                        if (dateFormat.format(messages[i].getSentDate()).equalsIgnoreCase(monthTemp.substring(0, 3))) {
+                            value++;
+                        }
+                    }
+                    emailCount[index] = value;
+                    index++;
+                }
+            }
+            
+            
+        } catch (NoSuchProviderException e) {
+            e.printStackTrace();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return emailCount;
+
+    }
+    
     public int getEmailCount(String user, String password, String folder, String month) {
         int emailCount = 0;
         
         try {
-            if (!store.isConnected()) {
-                store.connect(host, user, password);
+            if (store.isConnected()) {
+                store.close();
             }
+            store.connect(host, user, password);
+            
             Folder emailFolder = store.getFolder(folder.toUpperCase());
             emailFolder.open(Folder.READ_ONLY);
             Message[] messages = emailFolder.getMessages();

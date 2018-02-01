@@ -278,6 +278,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="99" green="99" red="0" type="rgb"/>
                     </Property>
+                    <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="This Month"/>
                     <Property name="toolTipText" type="java.lang.String" value="Email data for this month"/>
                     <Property name="iconTextGap" type="int" value="8"/>
@@ -401,6 +402,9 @@
                 <Property name="text" type="java.lang.String" value="Max Carter - mxcrtr.com"/>
                 <Property name="opaque" type="boolean" value="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="aboutMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
