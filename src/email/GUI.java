@@ -8,11 +8,13 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.DateFormatSymbols;
 import java.util.Date;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.NoSuchProviderException;
 import javax.swing.ImageIcon;
+import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
@@ -26,6 +28,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 public class GUI extends javax.swing.JFrame {
 
     Email email;
+    JTextField[] fields;
     
     public void enterEmailData() {
         String name = enterUsername.getText(), pw = passwordToString(enterPassword.getPassword()), folder = enterFolder.getText();
@@ -43,6 +46,33 @@ public class GUI extends javax.swing.JFrame {
         } catch (Exception ex) {
             
         }
+    }
+    
+    protected void checkTextField(JTextField field) {
+        field.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+              warn();
+            }
+            public void removeUpdate(DocumentEvent e) {
+              warn();
+            }
+            public void insertUpdate(DocumentEvent e) {
+              warn();
+            }
+
+            public void warn() {
+                enterSubmit.setEnabled(isSet(fields));
+            }
+        });
+    }
+    
+    public boolean isSet(JTextField[] fields) {
+        for (JTextField field : fields) {
+            if (field.getText().equals("")) {
+                return false;
+            }
+        }
+        return true;
     }
     
     public String getTodaysMonth() {
@@ -87,7 +117,10 @@ public class GUI extends javax.swing.JFrame {
     public GUI() throws NoSuchProviderException {
         initComponents();
         email = new Email();
-        
+        fields = new JTextField[] { enterUsername, enterPassword, enterFolder };
+        for (JTextField field : fields) {
+            checkTextField(field);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -155,6 +188,7 @@ public class GUI extends javax.swing.JFrame {
         enterSubmit.setForeground(new java.awt.Color(0, 153, 153));
         enterSubmit.setText("Enter");
         enterSubmit.setToolTipText("Create graph");
+        enterSubmit.setEnabled(false);
         enterSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 enterSubmitActionPerformed(evt);
