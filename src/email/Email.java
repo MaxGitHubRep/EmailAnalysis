@@ -15,7 +15,7 @@ public class Email {
     Properties properties;
     Store store;
     
-    String host = "pop.gmail.com";
+    String host = "pop.gmail.com"; //research how to get reigate.ac.uk domains to work instead of just gmail
     String mailStoreType = "pop3";
     
     SimpleDateFormat dateFormat = new SimpleDateFormat("MMM");
