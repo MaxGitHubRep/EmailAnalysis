@@ -27,18 +27,20 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class GUI extends javax.swing.JFrame {
 
+    public final String FOLDER = "INBOX";
+    
     Email email;
     JTextField[] fields;
     
     public void enterEmailData() {
-        String name = enterUsername.getText(), pw = passwordToString(enterPassword.getPassword()), folder = enterFolder.getText();
+        String name = enterUsername.getText(), pw = passwordToString(enterPassword.getPassword());
         
         try {
             if (graphTypeMonth.isSelected()) {
-                createGraph(getTodaysMonth(), new int[] { email.getEmailCount(name, pw, folder, getTodaysMonth()) });
+                createGraph(getTodaysMonth(), new int[] { email.getEmailCount(name, pw, FOLDER, getTodaysMonth()) });
             } else {
                 
-                createGraph("ALL", email.getEmailCountPerMonth(name, pw, folder));
+                createGraph("ALL", email.getEmailCountPerMonth(name, pw, FOLDER));
             }
             
         } catch (NoSuchProviderException ex) {
@@ -117,7 +119,7 @@ public class GUI extends javax.swing.JFrame {
     public GUI() throws NoSuchProviderException {
         initComponents();
         email = new Email();
-        fields = new JTextField[] { enterUsername, enterPassword, enterFolder };
+        fields = new JTextField[] { enterUsername, enterPassword };
         for (JTextField field : fields) {
             checkTextField(field);
         }
@@ -135,7 +137,6 @@ public class GUI extends javax.swing.JFrame {
         enterUsername = new javax.swing.JTextField();
         enterPassword = new javax.swing.JPasswordField();
         enterSubmit = new javax.swing.JButton();
-        enterFolder = new javax.swing.JTextField();
         panelTimeFrame = new javax.swing.JPanel();
         graphTypeMonth = new javax.swing.JRadioButton();
         graphTypeYear = new javax.swing.JRadioButton();
@@ -195,11 +196,6 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        enterFolder.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        enterFolder.setText("Inbox");
-        enterFolder.setToolTipText("Enter folder name here...");
-        enterFolder.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-
         panelTimeFrame.setBackground(new java.awt.Color(255, 255, 255));
         panelTimeFrame.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Time Frame", 0, 0, new java.awt.Font("Agency FB", 1, 18), new java.awt.Color(0, 153, 153))); // NOI18N
 
@@ -228,7 +224,7 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelTimeFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(graphTypeYear, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
-                    .addComponent(graphTypeMonth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(graphTypeMonth, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelTimeFrameLayout.setVerticalGroup(
@@ -248,12 +244,11 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(panelDetailsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(enterSubmit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
                     .addComponent(enterUsername)
                     .addComponent(enterPassword)
-                    .addComponent(enterFolder)
                     .addComponent(panelTimeFrame, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addComponent(enterSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
         );
         panelDetailsLayout.setVerticalGroup(
             panelDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,12 +257,9 @@ public class GUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(enterPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(enterFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelTimeFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addComponent(enterSubmit)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(enterSubmit))
         );
 
         panelGraph.setBackground(new java.awt.Color(255, 255, 255));
@@ -343,7 +335,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backLayout.createSequentialGroup()
                         .addComponent(panelDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
                         .addComponent(panelsSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(panelGraph, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -421,7 +413,6 @@ public class GUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel about;
     private javax.swing.JPanel back;
-    private javax.swing.JTextField enterFolder;
     private javax.swing.JPasswordField enterPassword;
     private javax.swing.JButton enterSubmit;
     private javax.swing.JTextField enterUsername;
