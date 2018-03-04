@@ -60,11 +60,11 @@ public class Email {
             
             
         } catch (NoSuchProviderException e) {
-            e.printStackTrace();
+            GUI.printError(e.toString());
         } catch (MessagingException e) {
-            e.printStackTrace();
+            GUI.printError(e.toString());
         } catch (Exception e) {
-            e.printStackTrace();
+            GUI.printError(e.toString());
         }
         
         return emailCount;
@@ -95,11 +95,11 @@ public class Email {
             }
             
         } catch (NoSuchProviderException e) {
-            e.printStackTrace();
+            GUI.printError(e.toString());
         } catch (MessagingException e) {
-            e.printStackTrace();
+            GUI.printError(e.toString());
         } catch (Exception e) {
-            e.printStackTrace();
+            GUI.printError(e.toString());
         }
         
         return emailCount;
